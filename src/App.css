@@ -21,7 +21,7 @@ body {
   overflow-x: hidden;
 }
 
-body.modal-open {
+body.navbar-open {
   overflow-y: hidden;
 }
 

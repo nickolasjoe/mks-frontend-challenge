@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 
 import fetchProducts from "../../api";
-import ProductItem, { Product } from "./ProductItem";
+import ProductItem from "./ProductItem";
+import { Product } from "../../context/MKSContext";
 
 const ProductList = () => {
   const { data, isLoading, isError } = useQuery({

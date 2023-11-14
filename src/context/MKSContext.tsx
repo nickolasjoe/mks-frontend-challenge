@@ -1,26 +1,32 @@
 import { createContext, useState } from "react";
-import { Product } from "../app/Products/ProductItem";
+
+export type Product = {
+  id: number;
+  name: "string";
+  description: "string";
+  photo: "string";
+  price: "string";
+};
+
+export type SelectedProduct = Product & {
+  quantity: number;
+};
 
 export type TMKSContext = {
-  isNavbarOpen: boolean;
-  setIsNavbarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedProducts: Product[];
-  setSelectedProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+  selected: SelectedProduct[];
+  setSelected: React.Dispatch<React.SetStateAction<SelectedProduct[]>>;
 };
 
 export const MKSContext = createContext<TMKSContext | null>(null);
 
 export const MKSContextProvider = ({ children }: React.PropsWithChildren) => {
-  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-  const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
+  const [selected, setSelected] = useState<SelectedProduct[]>([]);
 
   return (
     <MKSContext.Provider
       value={{
-        isNavbarOpen,
-        setIsNavbarOpen,
-        selectedProducts,
-        setSelectedProducts,
+        selected,
+        setSelected,
       }}
     >
       {children}

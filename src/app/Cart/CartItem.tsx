@@ -1,27 +1,30 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 import Counter from "./Counter";
 import { formatCurrency } from "../../utils/numbers";
 import useMKSContext from "../../hooks/useMKSContext";
-import { Product, TProduct } from "../Products/ProductItem";
+import { SelectedProduct } from "../../context/MKSContext";
 
-const CartItem = ({ product }: TProduct) => {
-  const { selectedProducts, setSelectedProducts } = useMKSContext();
-  const [count, setCount] = useState(1);
+export type TSelectedProduct = {
+  product: SelectedProduct;
+};
 
-  const handleClick = (product: Product) => {
-    setSelectedProducts(
-      selectedProducts.filter((obj) => obj.id !== product.id),
-    );
+const CartItem = ({ product }: TSelectedProduct) => {
+  const { selected, setSelected } = useMKSContext();
+
+  const handleClick = (product: SelectedProduct) => {
+    setSelected(selected.filter((obj) => obj.id !== product.id));
   };
+
+  const calculateTotalPrice = () =>
+    formatCurrency(Number(product.price) * product.quantity);
 
   return (
     <CartCard>
       <CartImage src={product.photo} alt={product.name} />
       <CartProduct>{product.name}</CartProduct>
-      <Counter count={count} setCount={setCount} />
-      <TotalPrice>{formatCurrency(product.price, count)}</TotalPrice>
+      <Counter product={product} />
+      <TotalPrice>{calculateTotalPrice()}</TotalPrice>
       <CloseButton onClick={() => handleClick(product)}>X</CloseButton>
     </CartCard>
   );

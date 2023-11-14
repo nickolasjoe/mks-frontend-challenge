@@ -2,16 +2,9 @@ import styled from "styled-components";
 
 import Bag from "../../assets/bag.svg?react";
 
+import { Product } from "../../context/MKSContext";
 import { formatCurrency } from "../../utils/numbers";
 import useMKSContext from "../../hooks/useMKSContext";
-
-export type Product = {
-  id: number;
-  name: "string";
-  description: "string";
-  photo: "string";
-  price: "string";
-};
 
 export type TProduct = {
   product: Product;
@@ -20,16 +13,23 @@ export type TProduct = {
 const ProductItem = ({ product }: TProduct) => {
   const { photo, name, price, description } = product;
 
-  const { selectedProducts, setSelectedProducts, setIsNavbarOpen } =
-    useMKSContext();
+  const { selected, setSelected } = useMKSContext();
+
+  const handleClick = () => {
+    const arr = [...selected];
+    const i = arr.findIndex((obj) => obj.id === product.id);
+    const hasProduct = arr[i];
+
+    if (!hasProduct) {
+      setSelected([...selected, { ...product, quantity: 1 }]);
+    } else {
+      arr[i].quantity += 1;
+      setSelected(arr);
+    }
+  };
 
   return (
-    <ProductCard
-      onClick={() => {
-        setSelectedProducts([...selectedProducts, product]);
-        setIsNavbarOpen(true);
-      }}
-    >
+    <ProductCard onClick={handleClick}>
       <button>
         <ProductImg src={photo} alt={name} />
         <Wrapper>

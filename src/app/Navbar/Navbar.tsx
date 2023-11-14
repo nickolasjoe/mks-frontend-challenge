@@ -1,30 +1,40 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import Div100vh from "react-div-100vh";
 
 import CartList from "../Cart";
-import { Product } from "../Products/ProductItem";
 import useMKSContext from "../../hooks/useMKSContext";
 import { formatCurrency } from "../../utils/numbers";
-import { useEffect } from "react";
 
-const Navbar = () => {
-  const { selectedProducts, isNavbarOpen, setIsNavbarOpen } = useMKSContext();
+type TNavbar = {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const Navbar = ({ isOpen, setIsOpen }: TNavbar) => {
+  const { selected } = useMKSContext();
 
   useEffect(() => {
-    if (isNavbarOpen) document.body.classList.add("modal-open");
-    else document.body.classList.remove("modal-open");
-  }, [isNavbarOpen]);
+    if (selected.length > 0) setIsOpen(true);
+  }, [selected, setIsOpen]);
 
-  const isCartEmpty = selectedProducts.length === 0;
+  useEffect(() => {
+    if (isOpen) document.body.classList.add("navbar-open");
+    else document.body.classList.remove("navbar-open");
+  }, [isOpen]);
 
-  const calculateTotalInProducts = (products: Product[]) => {
-    return formatCurrency(
-      products.reduce((acc, current) => acc + Number(current.price), 0),
+  const isCartEmpty = selected.length === 0;
+
+  const calculateTotalInProducts = () =>
+    formatCurrency(
+      selected.reduce(
+        (acc, current) => Number(current.price) * current.quantity + acc,
+        0,
+      ),
     );
-  };
 
   return (
-    <MKSNavbar className={isNavbarOpen ? "active" : ""}>
+    <MKSNavbar className={isOpen ? "active" : ""}>
       <Div100vh>
         <MKSCart>
           <div>
@@ -34,9 +44,7 @@ const Navbar = () => {
                 <br />
                 de compras
               </CartTitle>
-              <CloseButton onClick={() => setIsNavbarOpen(false)}>
-                X
-              </CloseButton>
+              <CloseButton onClick={() => setIsOpen(false)}>X</CloseButton>
             </TitleWrapper>
             {isCartEmpty ? (
               <EmptyCartMessage>Seu carrinho está vazio! 🙁</EmptyCartMessage>
@@ -47,13 +55,13 @@ const Navbar = () => {
           {!isCartEmpty && (
             <CartTotal>
               <p>Total:</p>
-              <p>{calculateTotalInProducts(selectedProducts)}</p>
+              <p>{calculateTotalInProducts()}</p>
             </CartTotal>
           )}
         </MKSCart>
         <CheckoutButton
           onClick={() => {
-            if (isCartEmpty) setIsNavbarOpen(false);
+            if (isCartEmpty) setIsOpen(false);
           }}
         >
           {isCartEmpty ? "Continuar Comprando" : "Finalizar Compra"}
@@ -92,6 +100,7 @@ const MKSCart = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 20px;
 
   @media (max-width: 450px) {
     padding: 15px;

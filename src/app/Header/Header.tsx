@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import Cart from "../../assets/cart.svg?react";
@@ -7,17 +8,21 @@ import MKSLogo from "./MKSLogo";
 import useMKSContext from "../../hooks/useMKSContext";
 
 const Header = () => {
-  const { selectedProducts, setIsNavbarOpen } = useMKSContext();
+  const { selected } = useMKSContext();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const calculateTotalItems = () =>
+    selected.reduce((acc, current) => current.quantity + acc, 0);
 
   return (
     <>
-      <Navbar />
+      <Navbar isOpen={isOpen} setIsOpen={setIsOpen} />
       <MKSHeader>
         <MKSNav>
           <MKSLogo />
-          <CartButton onClick={() => setIsNavbarOpen(true)}>
+          <CartButton onClick={() => setIsOpen(true)}>
             <Cart />
-            {selectedProducts.length}
+            {calculateTotalItems()}
           </CartButton>
         </MKSNav>
       </MKSHeader>

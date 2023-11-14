@@ -1,22 +1,33 @@
 import styled from "styled-components";
 
-type TCounter = {
-  count: number;
-  setCount: React.Dispatch<React.SetStateAction<number>>;
-};
+import { TSelectedProduct } from "./CartItem";
+import useMKSContext from "../../hooks/useMKSContext";
 
-const Counter = ({ count, setCount }: TCounter) => {
+type Action = "add" | "remove";
+
+const Counter = ({ product }: TSelectedProduct) => {
+  const { selected, setSelected } = useMKSContext();
+
+  const handleClick = (action: Action) => {
+    const arr = [...selected];
+    const i = arr.findIndex((obj) => obj.id === product.id);
+
+    if (action === "add") {
+      arr[i].quantity += 1;
+      setSelected(arr);
+    }
+
+    if (action === "remove" && product.quantity > 1) {
+      arr[i].quantity -= 1;
+      setSelected(arr);
+    }
+  };
+
   return (
     <MKSCounter>
-      <button
-        onClick={() => {
-          if (count > 1) setCount((prev) => prev - 1);
-        }}
-      >
-        -
-      </button>
-      <span>{count}</span>
-      <button onClick={() => setCount((prev) => prev + 1)}>+</button>
+      <button onClick={() => handleClick("remove")}>-</button>
+      <span>{product.quantity}</span>
+      <button onClick={() => handleClick("add")}>+</button>
     </MKSCounter>
   );
 };

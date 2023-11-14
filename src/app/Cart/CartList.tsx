@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 import CartItem from "./CartItem";
-import { Product } from "../Products/ProductItem";
 import useMKSContext from "../../hooks/useMKSContext";
+import { SelectedProduct } from "../../context/MKSContext";
 
 const CartList = () => {
-  const { selectedProducts } = useMKSContext();
+  const { selected } = useMKSContext();
 
   return (
     <Wrapper>
-      {selectedProducts.map((product: Product) => (
+      {selected.map((product: SelectedProduct) => (
         <CartItem key={product.id} product={product} />
       ))}
     </Wrapper>

@@ -1,10 +1,6 @@
-export const formatCurrency = (
-  value: string | number,
-  count?: number,
-): string => {
+export const formatCurrency = (value: string | number): string => {
   let v = value;
   if (typeof v === "string") v = Number(v);
-  if (count) v *= count;
 
   const result = Intl.NumberFormat("pt-BR", {
     style: "currency",

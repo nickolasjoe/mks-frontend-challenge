@@ -23,5 +23,7 @@ const Wrapper = styled.ul`
   flex-direction: column;
   gap: 20px;
   height: 450px;
+  padding-right: 20px;
+  overflow-x: hidden;
   overflow-y: scroll;
 `;

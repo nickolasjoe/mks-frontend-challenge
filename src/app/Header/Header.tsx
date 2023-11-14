@@ -49,4 +49,17 @@ const CartButton = styled.button`
   display: flex;
   align-items: center;
   gap: 16px;
+  transition: 0.2s ease-out;
+  &:hover {
+    background-color: var(--black-3);
+    color: var(--white-1);
+
+    path {
+      fill: var(--white-1);
+    }
+  }
+
+  path {
+    transition: 0.2s ease-out;
+  }
 `;

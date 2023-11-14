@@ -15,6 +15,8 @@ const Navbar = () => {
     else document.body.classList.remove("modal-open");
   }, [isNavbarOpen]);
 
+  const isCartEmpty = selectedProducts.length === 0;
+
   const calculateTotalInProducts = (products: Product[]) => {
     return formatCurrency(
       products.reduce((acc, current) => acc + Number(current.price), 0),
@@ -36,14 +38,26 @@ const Navbar = () => {
                 X
               </CloseButton>
             </TitleWrapper>
-            <CartList />
+            {isCartEmpty ? (
+              <EmptyCartMessage>Seu carrinho está vazio! 🙁</EmptyCartMessage>
+            ) : (
+              <CartList />
+            )}
           </div>
-          <CartTotal>
-            <p>Total:</p>
-            <p>{calculateTotalInProducts(selectedProducts)}</p>
-          </CartTotal>
+          {!isCartEmpty && (
+            <CartTotal>
+              <p>Total:</p>
+              <p>{calculateTotalInProducts(selectedProducts)}</p>
+            </CartTotal>
+          )}
         </MKSCart>
-        <CheckoutButton>Finalizar Compra</CheckoutButton>
+        <CheckoutButton
+          onClick={() => {
+            if (isCartEmpty) setIsNavbarOpen(false);
+          }}
+        >
+          {isCartEmpty ? "Continuar Comprando" : "Finalizar Compra"}
+        </CheckoutButton>
       </Div100vh>
     </MKSNavbar>
   );
@@ -87,6 +101,11 @@ const MKSCart = styled.div`
 const TitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const EmptyCartMessage = styled.p`
+  color: var(--white-1);
+  text-align: center;
 `;
 
 const CartTitle = styled.h1`

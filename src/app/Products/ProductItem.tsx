@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Bag from "../../assets/bag.svg?react";
+import Bag from "../Icons/Bag";
 
 import { formatCurrency } from "../../utils/numbers";
 import useMKSContext from "../../hooks/useMKSContext";

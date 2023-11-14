@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Cart from "../../assets/cart.svg?react";
+import Cart from "../Icons/Cart";
 
 import Navbar from "../Navbar";
 import MKSLogo from "./MKSLogo";

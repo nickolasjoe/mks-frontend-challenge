@@ -103,6 +103,7 @@ const Skeleton = styled.div`
   background-color: var(--white-2);
   background-size: 200%;
   animation: skeleton 1.5s infinite linear;
+  z-index: 1;
 `;
 
 const ProductImg = styled.img`

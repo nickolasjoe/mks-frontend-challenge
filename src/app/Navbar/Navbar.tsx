@@ -83,7 +83,7 @@ const MKSNavbar = styled.nav`
   box-shadow: -5px 0 6px rgba(0, 0, 0, 0.13);
   transition: transform 0.3s ease-in;
   transform: translateX(100%);
-  z-index: 1;
+  z-index: 2;
   &.active {
     transform: translateX(0);
   }

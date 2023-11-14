@@ -9,15 +9,13 @@ const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <MKSContextProvider>
-          <Header />
-          <Products />
-        </MKSContextProvider>
-        <Footer />
-      </QueryClientProvider>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <MKSContextProvider>
+        <Header />
+        <Products />
+      </MKSContextProvider>
+      <Footer />
+    </QueryClientProvider>
   );
 };
 

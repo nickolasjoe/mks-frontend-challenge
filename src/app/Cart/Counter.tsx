@@ -1,9 +1,11 @@
-import { useState } from "react";
 import styled from "styled-components";
 
-const Counter = () => {
-  const [count, setCount] = useState(1);
+type TCounter = {
+  count: number;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+};
 
+const Counter = ({ count, setCount }: TCounter) => {
   return (
     <MKSCounter>
       <button

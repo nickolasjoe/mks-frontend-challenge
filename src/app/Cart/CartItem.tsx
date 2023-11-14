@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import Counter from "./Counter";
@@ -7,6 +8,7 @@ import { Product, TProduct } from "../Products/ProductItem";
 
 const CartItem = ({ product }: TProduct) => {
   const { selectedProducts, setSelectedProducts } = useMKSContext();
+  const [count, setCount] = useState(1);
 
   const handleClick = (product: Product) => {
     setSelectedProducts(
@@ -18,8 +20,8 @@ const CartItem = ({ product }: TProduct) => {
     <CartCard>
       <CartImage src={product.photo} alt={product.name} />
       <CartProduct>{product.name}</CartProduct>
-      <Counter />
-      <TotalPrice>{formatCurrency(product.price)}</TotalPrice>
+      <Counter count={count} setCount={setCount} />
+      <TotalPrice>{formatCurrency(product.price, count)}</TotalPrice>
       <CloseButton onClick={() => handleClick(product)}>X</CloseButton>
     </CartCard>
   );

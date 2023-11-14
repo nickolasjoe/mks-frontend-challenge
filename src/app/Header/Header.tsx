@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Cart from "../Icons/Cart";
+import Cart from "../../assets/cart.svg?react";
 
 import Navbar from "../Navbar";
 import MKSLogo from "./MKSLogo";
@@ -42,6 +42,7 @@ const MKSNav = styled.nav`
 const CartButton = styled.button`
   font-size: 18px;
   font-weight: 700;
+  color: var(--black-3);
   background: var(--white-1);
   padding: 15px 28px 15px 15px;
   border-radius: 8px;

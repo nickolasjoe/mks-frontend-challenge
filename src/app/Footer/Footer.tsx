@@ -3,7 +3,10 @@ import styled from "styled-components";
 const Footer = () => {
   return (
     <MKSFooter>
-      <small>MKS sistemas © Todos os direitos reservados</small>
+      <small>
+        MKS sistemas © Todos os direitos reservados. Feito com ❤️ por{" "}
+        <a href="https://www.nickolasjoe.com/">Nickolas Joe</a>.
+      </small>
     </MKSFooter>
   );
 };
@@ -17,5 +20,9 @@ const MKSFooter = styled.footer`
 
   small {
     font-size: 12px;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 `;

@@ -21,6 +21,10 @@ body {
   overflow-x: hidden;
 }
 
+body.modal-open {
+  overflow-y: hidden;
+}
+
 body,
 button {
   font: 400 16px/1 var(--font);

@@ -1,12 +1,19 @@
 import styled from "styled-components";
+import Div100vh from "react-div-100vh";
 
 import CartList from "../Cart";
 import { Product } from "../Products/ProductItem";
 import useMKSContext from "../../hooks/useMKSContext";
 import { formatCurrency } from "../../utils/numbers";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const { selectedProducts, isNavbarOpen, setIsNavbarOpen } = useMKSContext();
+
+  useEffect(() => {
+    if (isNavbarOpen) document.body.classList.add("modal-open");
+    else document.body.classList.remove("modal-open");
+  }, [isNavbarOpen]);
 
   const calculateTotalInProducts = (products: Product[]) => {
     return formatCurrency(
@@ -16,24 +23,28 @@ const Navbar = () => {
 
   return (
     <MKSNavbar className={isNavbarOpen ? "active" : ""}>
-      <MKSCart>
-        <div>
-          <TitleWrapper>
-            <CartTitle>
-              Carrinho
-              <br />
-              de compras
-            </CartTitle>
-            <CloseButton onClick={() => setIsNavbarOpen(false)}>X</CloseButton>
-          </TitleWrapper>
-          <CartList />
-        </div>
-        <CartTotal>
-          <p>Total:</p>
-          <p>{calculateTotalInProducts(selectedProducts)}</p>
-        </CartTotal>
-      </MKSCart>
-      <CheckoutButton>Finalizar Compra</CheckoutButton>
+      <Div100vh>
+        <MKSCart>
+          <div>
+            <TitleWrapper>
+              <CartTitle>
+                Carrinho
+                <br />
+                de compras
+              </CartTitle>
+              <CloseButton onClick={() => setIsNavbarOpen(false)}>
+                X
+              </CloseButton>
+            </TitleWrapper>
+            <CartList />
+          </div>
+          <CartTotal>
+            <p>Total:</p>
+            <p>{calculateTotalInProducts(selectedProducts)}</p>
+          </CartTotal>
+        </MKSCart>
+        <CheckoutButton>Finalizar Compra</CheckoutButton>
+      </Div100vh>
     </MKSNavbar>
   );
 };
@@ -46,16 +57,18 @@ const MKSNavbar = styled.nav`
   right: 0;
   width: 100%;
   max-width: 486px;
-  height: 100vh;
   background-color: var(--blue);
   box-shadow: -5px 0 6px rgba(0, 0, 0, 0.13);
-  display: flex;
-  flex-direction: column;
   transition: transform 0.3s ease-in;
   transform: translateX(100%);
   z-index: 1;
   &.active {
     transform: translateX(0);
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
   }
 `;
 

@@ -11,7 +11,7 @@ const ProductList = () => {
     queryFn: fetchProducts,
   });
 
-  if (isLoading) return <p>Carregando...</p>;
+  if (isLoading) return <Spinner />;
 
   if (isError) return <p>Error!</p>;
 
@@ -39,4 +39,13 @@ const Wrapper = styled.ul`
   @media (max-width: 720px) {
     grid-template-columns: 1fr;
   }
+`;
+
+const Spinner = styled.ul`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 10px solid rgba(150, 150, 150, 0.1);
+  border-top-color: var(--blue);
+  animation: spin 1s linear infinite;
 `;

@@ -5,14 +5,20 @@ import Bag from "../../assets/bag.svg?react";
 import { Product } from "../../context/MKSContext";
 import { formatCurrency } from "../../utils/numbers";
 import useMKSContext from "../../hooks/useMKSContext";
+import { useState } from "react";
 
 export type TProduct = {
   product: Product;
 };
 
+type THandleLoad = {
+  target: EventTarget;
+};
+
 const ProductItem = ({ product }: TProduct) => {
   const { photo, name, price, description } = product;
 
+  const [isLoading, setLoading] = useState(true);
   const { selected, setSelected } = useMKSContext();
 
   const handleClick = () => {
@@ -28,10 +34,18 @@ const ProductItem = ({ product }: TProduct) => {
     }
   };
 
+  const handleLoad = ({ target }: THandleLoad) => {
+    setLoading(false);
+    if (target instanceof HTMLImageElement) target.style.opacity = "1";
+  };
+
   return (
     <ProductCard onClick={handleClick}>
       <button>
-        <ProductImg src={photo} alt={name} />
+        <ImageWrapper>
+          {isLoading && <Skeleton />}
+          <ProductImg src={photo} alt={name} onLoad={handleLoad} />
+        </ImageWrapper>
         <Wrapper>
           <div>
             <ProductTitle>{name}</ProductTitle>
@@ -70,6 +84,36 @@ const ProductCard = styled.li`
   }
 `;
 
+const ImageWrapper = styled.div`
+  display: grid;
+  align-self: center;
+  width: 100%;
+  padding-bottom: 15px;
+`;
+
+const Skeleton = styled.div`
+  grid-area: 1/1;
+  height: 100%;
+  background-image: linear-gradient(
+    90deg,
+    var(--white-2) 0,
+    var(--white-1) 50%,
+    var(--white-2) 100%
+  );
+  background-color: var(--white-2);
+  background-size: 200%;
+  animation: skeleton 1.5s infinite linear;
+`;
+
+const ProductImg = styled.img`
+  grid-area: 1/1;
+  max-height: 138px;
+  margin-inline: auto;
+  padding-top: 18px;
+  opacity: 0;
+  transition: 0.2s;
+`;
+
 const Wrapper = styled.div`
   width: 100%;
 
@@ -80,13 +124,6 @@ const Wrapper = styled.div`
     align-items: center;
     gap: 8px;
   }
-`;
-
-const ProductImg = styled.img`
-  max-height: 138px;
-  margin-top: 18px;
-  margin-bottom: 15px;
-  align-self: center;
 `;
 
 const ProductTitle = styled.h2`

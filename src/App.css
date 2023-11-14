@@ -49,3 +49,18 @@ ul {
 img {
   max-width: 100%;
 }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes skeleton {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: -200%;
+  }
+}

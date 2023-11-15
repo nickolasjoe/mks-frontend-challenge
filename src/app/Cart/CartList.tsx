@@ -22,7 +22,7 @@ const Wrapper = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height: 40vh;
+  height: 42vh;
   padding-right: 20px;
   overflow-x: hidden;
   overflow-y: scroll;

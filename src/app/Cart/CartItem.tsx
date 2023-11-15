@@ -44,6 +44,11 @@ const CartCard = styled.li`
   justify-content: space-between;
   gap: 15px;
   position: relative;
+
+  @media (max-width: 380px) {
+    padding: 10px;
+    gap: 5px;
+  }
 `;
 
 const CartImage = styled.img`

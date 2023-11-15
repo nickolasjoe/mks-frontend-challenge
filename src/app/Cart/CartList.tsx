@@ -22,8 +22,12 @@ const Wrapper = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height: 450px;
+  height: 40vh;
   padding-right: 20px;
   overflow-x: hidden;
   overflow-y: scroll;
+
+  @media (max-width: 450px) {
+    height: 350px;
+  }
 `;

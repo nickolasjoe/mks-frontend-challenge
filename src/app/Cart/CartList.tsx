@@ -27,7 +27,7 @@ const Wrapper = styled.ul`
   overflow-x: hidden;
   overflow-y: scroll;
 
-  @media (max-width: 500px) {
+  @media (max-width: 450px) {
     height: 350px;
   }
 `;

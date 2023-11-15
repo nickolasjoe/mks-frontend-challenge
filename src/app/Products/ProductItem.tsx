@@ -93,7 +93,7 @@ const ImageWrapper = styled.div`
 
 const Skeleton = styled.div`
   grid-area: 1/1;
-  height: 100%;
+  height: 156px;
   background-image: linear-gradient(
     90deg,
     var(--white-2) 0,
@@ -110,7 +110,7 @@ const ProductImg = styled.img`
   grid-area: 1/1;
   max-height: 138px;
   margin-inline: auto;
-  padding-top: 18px;
+  margin-top: 18px;
   opacity: 0;
   transition: 0.2s;
 `;

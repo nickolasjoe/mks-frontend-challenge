@@ -5,11 +5,7 @@ import { formatCurrency } from "../../utils/numbers";
 import useMKSContext from "../../hooks/useMKSContext";
 import { SelectedProduct } from "../../context/MKSContext";
 
-export type TSelectedProduct = {
-  product: SelectedProduct;
-};
-
-const CartItem = ({ product }: TSelectedProduct) => {
+const CartItem = ({ product }: { product: SelectedProduct }) => {
   const { selected, setSelected } = useMKSContext();
 
   const handleClick = (product: SelectedProduct) => {

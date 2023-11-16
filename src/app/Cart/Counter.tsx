@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-import { TSelectedProduct } from "./CartItem";
 import useMKSContext from "../../hooks/useMKSContext";
+import { SelectedProduct } from "../../context/MKSContext";
 
 type Action = "add" | "remove";
 
-const Counter = ({ product }: TSelectedProduct) => {
+const Counter = ({ product }: { product: SelectedProduct }) => {
   const { selected, setSelected } = useMKSContext();
 
   const handleClick = (action: Action) => {

@@ -7,11 +7,7 @@ import { Product } from "../../context/MKSContext";
 import { formatCurrency } from "../../utils/numbers";
 import useMKSContext from "../../hooks/useMKSContext";
 
-type TProduct = {
-  product: Product;
-};
-
-const ProductItem = ({ product }: TProduct) => {
+const ProductItem = ({ product }: { product: Product }) => {
   const { photo, name, price, description } = product;
 
   const [isLoading, setLoading] = useState(true);

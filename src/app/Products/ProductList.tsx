@@ -13,7 +13,7 @@ const ProductList = () => {
 
   if (isLoading) return <Spinner />;
 
-  if (isError) return <p>Error!</p>;
+  if (isError) return <p>Um erro ocorreu!</p>;
 
   return (
     <Wrapper>
@@ -31,11 +31,9 @@ const Wrapper = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 22px;
-
   @media (max-width: 960px) {
     grid-template-columns: repeat(3, 1fr);
   }
-
   @media (max-width: 720px) {
     grid-template-columns: 1fr;
   }

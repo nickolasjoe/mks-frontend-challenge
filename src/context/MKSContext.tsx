@@ -12,7 +12,7 @@ export type SelectedProduct = Product & {
   quantity: number;
 };
 
-export type TMKSContext = {
+type TMKSContext = {
   selected: SelectedProduct[];
   setSelected: React.Dispatch<React.SetStateAction<SelectedProduct[]>>;
 };

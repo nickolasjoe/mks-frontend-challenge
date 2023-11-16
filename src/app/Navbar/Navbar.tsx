@@ -14,16 +14,16 @@ type TNavbar = {
 const Navbar = ({ isOpen, setIsOpen }: TNavbar) => {
   const { selected } = useMKSContext();
 
+  const isCartEmpty = selected.length === 0;
+
   useEffect(() => {
-    if (selected.length > 0) setIsOpen(true);
-  }, [selected, setIsOpen]);
+    if (!isCartEmpty) setIsOpen(true);
+  }, [isCartEmpty, setIsOpen]);
 
   useEffect(() => {
     if (isOpen) document.body.classList.add("navbar-open");
     else document.body.classList.remove("navbar-open");
   }, [isOpen]);
-
-  const isCartEmpty = selected.length === 0;
 
   const calculateTotalInProducts = () =>
     formatCurrency(
@@ -101,7 +101,6 @@ const MKSCart = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
-
   @media (max-width: 450px) {
     padding: 15px;
   }

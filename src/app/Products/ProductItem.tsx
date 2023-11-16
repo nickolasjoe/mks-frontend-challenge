@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import Bag from "../../assets/bag.svg?react";
@@ -5,14 +6,9 @@ import Bag from "../../assets/bag.svg?react";
 import { Product } from "../../context/MKSContext";
 import { formatCurrency } from "../../utils/numbers";
 import useMKSContext from "../../hooks/useMKSContext";
-import { useState } from "react";
 
-export type TProduct = {
+type TProduct = {
   product: Product;
-};
-
-type THandleLoad = {
-  target: EventTarget;
 };
 
 const ProductItem = ({ product }: TProduct) => {
@@ -24,9 +20,9 @@ const ProductItem = ({ product }: TProduct) => {
   const handleClick = () => {
     const arr = [...selected];
     const i = arr.findIndex((obj) => obj.id === product.id);
-    const hasProduct = arr[i];
+    const isSameProduct = !!arr[i];
 
-    if (!hasProduct) {
+    if (!isSameProduct) {
       setSelected([...selected, { ...product, quantity: 1 }]);
     } else {
       arr[i].quantity += 1;
@@ -34,7 +30,7 @@ const ProductItem = ({ product }: TProduct) => {
     }
   };
 
-  const handleLoad = ({ target }: THandleLoad) => {
+  const handleLoad = ({ target }: { target: EventTarget }) => {
     setLoading(false);
     if (target instanceof HTMLImageElement) target.style.opacity = "1";
   };

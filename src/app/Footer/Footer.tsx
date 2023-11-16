@@ -22,7 +22,6 @@ const MKSFooter = styled.footer`
   small {
     display: block;
     font-size: 12px;
-
     @media (max-width: 485px) {
       max-width: 300px;
       margin-inline: auto;

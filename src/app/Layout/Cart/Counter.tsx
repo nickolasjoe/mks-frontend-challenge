@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import useMKSContext from "../../hooks/useMKSContext";
-import { SelectedProduct } from "../../context/MKSContext";
+import useMKSContext from "../../../hooks/useMKSContext";
+import { SelectedProduct } from "../../../context/MKSContext";
 
 type Action = "add" | "remove";
 

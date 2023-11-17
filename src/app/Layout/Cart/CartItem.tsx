@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 import Counter from "./Counter";
-import { formatCurrency } from "../../utils/numbers";
-import useMKSContext from "../../hooks/useMKSContext";
-import { SelectedProduct } from "../../context/MKSContext";
+import { formatCurrency } from "../../../utils/numbers";
+import useMKSContext from "../../../hooks/useMKSContext";
+import { SelectedProduct } from "../../../context/MKSContext";
 
 const CartItem = ({ product }: { product: SelectedProduct }) => {
   const { selected, setSelected } = useMKSContext();

@@ -1,21 +1,29 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import { MKSContextProvider } from "./context/MKSContext";
-import Header from "./app/Header";
+import Header from "./app/Layout/Header";
 import Products from "./app/Products";
-import Footer from "./app/Footer";
+import ThankYou from "./app/ThankYou";
+import Footer from "./app/Layout/Footer";
 import "./App.css";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <MKSContextProvider>
-        <Header />
-        <Products />
-      </MKSContextProvider>
-      <Footer />
-    </QueryClientProvider>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <MKSContextProvider>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Products />} />
+            <Route path="thank-you" element={<ThankYou />} />
+          </Routes>
+          <Footer />
+        </MKSContextProvider>
+      </QueryClientProvider>
+    </BrowserRouter>
   );
 };
 

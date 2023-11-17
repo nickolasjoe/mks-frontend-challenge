@@ -1,10 +1,11 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Div100vh from "react-div-100vh";
 
 import CartList from "../Cart";
-import useMKSContext from "../../hooks/useMKSContext";
-import { formatCurrency } from "../../utils/numbers";
+import useMKSContext from "../../../hooks/useMKSContext";
+import { formatCurrency } from "../../../utils/numbers";
 
 type TNavbar = {
   isOpen: boolean;
@@ -13,6 +14,7 @@ type TNavbar = {
 
 const Navbar = ({ isOpen, setIsOpen }: TNavbar) => {
   const { selected } = useMKSContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (selected.length > 0) setIsOpen(true);
@@ -61,7 +63,8 @@ const Navbar = ({ isOpen, setIsOpen }: TNavbar) => {
         </MKSCart>
         <CheckoutButton
           onClick={() => {
-            if (isCartEmpty) setIsOpen(false);
+            setIsOpen(false);
+            if (!isCartEmpty) navigate("/thank-you");
           }}
         >
           {isCartEmpty ? "Continuar Comprando" : "Finalizar Compra"}

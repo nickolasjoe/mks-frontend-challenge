@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import Cart from "../../assets/cart.svg?react";
+import Cart from "../../../assets/cart.svg?react";
 
 import Navbar from "../Navbar";
 import MKSLogo from "./MKSLogo";
-import useMKSContext from "../../hooks/useMKSContext";
+import useMKSContext from "../../../hooks/useMKSContext";
 
 const Header = () => {
   const { selected } = useMKSContext();

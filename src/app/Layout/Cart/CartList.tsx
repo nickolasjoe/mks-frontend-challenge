@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 import CartItem from "./CartItem";
-import useMKSContext from "../../hooks/useMKSContext";
-import { SelectedProduct } from "../../context/MKSContext";
+import useMKSContext from "../../../hooks/useMKSContext";
+import { SelectedProduct } from "../../../context/MKSContext";
 
 const CartList = () => {
   const { selected } = useMKSContext();
